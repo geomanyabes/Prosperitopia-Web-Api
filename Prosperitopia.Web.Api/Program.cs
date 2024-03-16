@@ -8,7 +8,7 @@ builder.Host.ConfigureServices((context, services) =>
     var configuration = context.Configuration;
     services.AddDbContext<ProsperitopiaDbContext>(opt =>
     {
-        opt.UseSqlServer(configuration.GetConnectionString("Default"));
+        opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
     });
 });
 // Add services to the container.

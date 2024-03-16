@@ -7,15 +7,25 @@ namespace Prosperitopia.Domain
     {
         public DbSet<Item> Items { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public ProsperitopiaDbContext(DbContextOptions<ProsperitopiaDbContext> options) : base(options) { }
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public ProsperitopiaDbContext()
+        {
+
+        }
+        public ProsperitopiaDbContext(DbContextOptions<ProsperitopiaDbContext> options) : base(options) 
+        { 
+
+        }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
-            mb.Entity<Item>(e =>
+            mb.Entity<Item>(entity =>
             {
-                e.ToTable("Item");
-                e.HasOne(e => e.Category)
+                entity.ToTable("Item");
+                entity.HasOne(e => e.Category)
                 .WithMany(e => e.Items)
                 .HasForeignKey(e => e.CategoryId)
                 .HasConstraintName("FK_Item_Category");
