@@ -1,14 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Prosperitopia.Domain.Interface;
-using Prosperitopia.Domain.Model.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Prosperitopia.Domain.Model.Enum;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Prosperitopia.Application.Extension
 {

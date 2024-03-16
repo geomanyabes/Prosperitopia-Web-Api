@@ -3,44 +3,41 @@ using Microsoft.EntityFrameworkCore;
 using Prosperitopia.Application.Extension;
 using Prosperitopia.Application.Interface.Service;
 using Prosperitopia.Application.Interface.Validator;
-using Prosperitopia.Application.Validator;
 using Prosperitopia.DataAccess.Interface;
 using Prosperitopia.Domain.Model.Dto;
 using Prosperitopia.Domain.Model.Entity;
 using Prosperitopia.Domain.Model.Enum;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Prosperitopia.Application.Service
 {
-    public class ItemService : IItemService
+    public class CategoryService : ICategoryService
     {
-        private readonly IItemRepository _itemRepository;
-        private readonly IItemValidator _itemValidator;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryValidator _categoryValidator;
         private readonly IMapper _mapper;
 
-        public ItemService(IItemRepository itemRepository, IItemValidator itemValidator, IMapper mapper)
+        public CategoryService(ICategoryRepository categoryRepository, ICategoryValidator categoryValidator, IMapper mapper)
         {
-            _itemRepository = itemRepository;
-            _itemValidator = itemValidator;
+            _categoryRepository = categoryRepository;
+            _categoryValidator = categoryValidator;
             _mapper = mapper;
         }
 
-        public async Task<List<ItemDto>> GetItems(SearchFilter searchFilter, PageFilter pageFilter)
+        public async Task<List<CategoryDto>> GetCategories(SearchFilter searchFilter, PageFilter? pageFilter)
         {
-            var query = _itemRepository.GetAll()
-                .Include(x => x.Category).AsQueryable();
+            var query = _categoryRepository.GetAll()
+                .AsQueryable();
 
             string search = searchFilter.Search;
-            
-            if(!string.IsNullOrWhiteSpace(search))
+
+            if (!string.IsNullOrWhiteSpace(search))
             {
                 switch (searchFilter.SearchType)
                 {
                     case SearchType.CONTAINS:
                         query = query.Where(x => EF.Functions.Like(x.Name, $"%{search}%") || EF.Functions.Like(x.Description, $"%{search}%"));
                         break;
-                    case SearchType.STARTS_WITH: 
+                    case SearchType.STARTS_WITH:
                         query = query.Where(x => EF.Functions.Like(x.Name, $"{search}%") || EF.Functions.Like(x.Description, $"{search}%"));
                         break;
                     case SearchType.ENDS_WITH:
@@ -58,35 +55,24 @@ namespace Prosperitopia.Application.Service
             query = query.OrderByString(pageFilter.SortProperty, pageFilter.SortDirection)
                 .Skip(page * pageSize).Take(pageSize);
 
-            var items = await query.ToListAsync();
-            return _mapper.Map<List<ItemDto>>(items);
+            var categorys = await query.ToListAsync();
+            return _mapper.Map<List<CategoryDto>>(categorys);
         }
 
-        public async Task<ItemDto> GetItem(long id)
+        public async Task<CategoryDto> GetCategory(long id)
         {
-            var item = await _itemRepository.GetByIdAsync(id);
-            return _mapper.Map<ItemDto>(item);
+            var category = await _categoryRepository.GetByIdAsync(id);
+            return _mapper.Map<CategoryDto>(category);
         }
-
-        public async Task<ItemDto> UpdateItem(CreUpdateItem item)
+        public async Task<CategoryDto> CreateCategory(CategoryDto category)
         {
-            var mapped = _mapper.Map<Item>(item);
+            var mapped = _mapper.Map<Category>(category);
 
-            var existing = await _itemValidator.ValidateOnUpdate(mapped);
+            _ = await _categoryValidator.ValidateOnCreate(mapped);
 
-            _itemRepository.Update(existing, mapped);
-            await _itemRepository.SaveChangesAsync();
-            return _mapper.Map<ItemDto>(existing);
-        }
-        public async Task<ItemDto> CreateItem(CreUpdateItem item)
-        {
-            var mapped = _mapper.Map<Item>(item);
-
-            _ = await _itemValidator.ValidateOnCreate(mapped);
-
-            _itemRepository.Insert(mapped);
-            await _itemRepository.SaveChangesAsync();
-            return _mapper.Map<ItemDto>(mapped);
+            _categoryRepository.Insert(mapped);
+            await _categoryRepository.SaveChangesAsync();
+            return _mapper.Map<CategoryDto>(mapped);
         }
     }
 }

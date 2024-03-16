@@ -1,4 +1,8 @@
-﻿using Prosperitopia.DataAccess.Interface;
+﻿using Prosperitopia.Application.Interface.Service;
+using Prosperitopia.Application.Interface.Validator;
+using Prosperitopia.Application.Service;
+using Prosperitopia.Application.Validator;
+using Prosperitopia.DataAccess.Interface;
 using Prosperitopia.DataAccess.Repository;
 
 namespace Prosperitopia.Web.Api.Configuration
@@ -7,6 +11,10 @@ namespace Prosperitopia.Web.Api.Configuration
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IItemValidator, ItemValidator>();
+            services.AddScoped<ICategoryValidator, CategoryValidator>();
+
             return services;
         }
 

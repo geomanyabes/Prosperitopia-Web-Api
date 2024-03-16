@@ -6,10 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureServices((context, services) =>
 {
     var configuration = context.Configuration;
-    services.AddDbContext<ProsperitopiaDbContext>(opt =>
-    {
-        opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-    });
+    services.AddRouting(options => options.LowercaseUrls = true);
+
+    services.AddDbContext<ProsperitopiaDbContext>();
+    //commented out. we will use in-memory for now.
+    //services.AddDbContext<ProsperitopiaDbContext>(opt =>
+    //{
+    //    opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+    //});
 });
 // Add services to the container.
 
