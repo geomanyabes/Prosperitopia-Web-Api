@@ -5,13 +5,13 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosperitopia.Web.Api", "Prosperitopia.Web.Api\Prosperitopia.Web.Api.csproj", "{A45325C6-D956-493C-A90E-5DF322768159}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosperitopia.Tests", "Prosperitopia.Tests\Prosperitopia.Tests.csproj", "{77A6D84D-22E6-4ED0-A516-753E66429F37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosperitopia.Tests", "Prosperitopia.Tests\Prosperitopia.Tests.csproj", "{77A6D84D-22E6-4ED0-A516-753E66429F37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosperitopia.Application", "Prosperitopia.Application\Prosperitopia.Application.csproj", "{AB8C313C-2A10-4920-A05D-4930ADCA853C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosperitopia.Application", "Prosperitopia.Application\Prosperitopia.Application.csproj", "{AB8C313C-2A10-4920-A05D-4930ADCA853C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosperitopia.DataAccess", "Prosperitopia.DataAccess\Prosperitopia.DataAccess.csproj", "{3B8E9245-3139-4D5D-BFC2-16710300E1C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosperitopia.DataAccess", "Prosperitopia.DataAccess\Prosperitopia.DataAccess.csproj", "{3B8E9245-3139-4D5D-BFC2-16710300E1C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosperitopia.Domain", "..\Prosperitopia.Domain\Prosperitopia.Domain.csproj", "{E6994A24-B615-4487-9EDB-56BB659DB0D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosperitopia.Domain", "Prosperitopia.Domain\Prosperitopia.Domain.csproj", "{B03765E1-3EF9-4F07-BF8A-CFCB73CAF850}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{3B8E9245-3139-4D5D-BFC2-16710300E1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B8E9245-3139-4D5D-BFC2-16710300E1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B8E9245-3139-4D5D-BFC2-16710300E1C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6994A24-B615-4487-9EDB-56BB659DB0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6994A24-B615-4487-9EDB-56BB659DB0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6994A24-B615-4487-9EDB-56BB659DB0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6994A24-B615-4487-9EDB-56BB659DB0D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B03765E1-3EF9-4F07-BF8A-CFCB73CAF850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03765E1-3EF9-4F07-BF8A-CFCB73CAF850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03765E1-3EF9-4F07-BF8A-CFCB73CAF850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03765E1-3EF9-4F07-BF8A-CFCB73CAF850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
