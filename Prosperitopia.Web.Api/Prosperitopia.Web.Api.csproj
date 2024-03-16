@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Prosperitopia.Application\Prosperitopia.Application.csproj" />
     <ProjectReference Include="..\Prosperitopia.Domain\Prosperitopia.Domain.csproj" />
   </ItemGroup>
