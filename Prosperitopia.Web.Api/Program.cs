@@ -1,5 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Prosperitopia.Domain;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.ConfigureServices((context, services) =>
+{
+    var configuration = context.Configuration;
+    services.AddDbContext<ProsperitopiaDbContext>(opt =>
+    {
+        opt.UseSqlServer(configuration.GetConnectionString("Default"));
+    });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
