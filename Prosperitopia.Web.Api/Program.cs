@@ -1,11 +1,14 @@
-using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using Prosperitopia.Application.Configuration;
 using Prosperitopia.Domain;
+using Prosperitopia.Web.Api.Configuration;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureServices((context, services) =>
 {
-    var configuration = context.Configuration;
+    //var configuration = context.Configuration;
     services.AddRouting(options => options.LowercaseUrls = true);
 
     services.AddDbContext<ProsperitopiaDbContext>();
@@ -14,8 +17,20 @@ builder.Host.ConfigureServices((context, services) =>
     //{
     //    opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
     //});
-});
-// Add services to the container.
+
+    services.RegisterRepositories();
+    services.RegisterServices();
+
+    var mapperConfiguration = new MapperConfiguration(cfg =>
+    {
+        cfg.AddProfile<MappingProfile>();
+    });
+
+    var mapper = mapperConfiguration.CreateMapper();
+    services.AddSingleton(mapper);
+})
+.UseSerilog((hostingContext, loggerConfiguration) =>
+            loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
