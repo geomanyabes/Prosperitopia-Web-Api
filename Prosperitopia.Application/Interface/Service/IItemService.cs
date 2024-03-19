@@ -6,7 +6,7 @@ namespace Prosperitopia.Application.Interface.Service
     {
         Task<ItemDto> CreateItem(CreUpdateItem item);
         Task<ItemDto> GetItem(long id);
-        Task<List<ItemDto>> GetItems(SearchFilter searchFilter, PageFilter pageFilter);
+        Task<PagedResult<ItemDto>> GetItems(SearchFilter searchFilter, PageFilter pageFilter);
         Task<ItemDto> UpdateItem(CreUpdateItem item);
     }
 }

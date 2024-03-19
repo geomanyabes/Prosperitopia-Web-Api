@@ -26,7 +26,7 @@ namespace Prosperitopia.Application.Service
             _mapper = mapper;
         }
 
-        public async Task<List<ItemDto>> GetItems(SearchFilter searchFilter, PageFilter pageFilter)
+        public async Task<PagedResult<ItemDto>> GetItems(SearchFilter searchFilter, PageFilter pageFilter)
         {
             var query = _itemRepository.GetAll()
                 .Include(x => x.Category).AsQueryable();
@@ -57,9 +57,10 @@ namespace Prosperitopia.Application.Service
             int pageSize = pageFilter.PageSize;
             query = query.OrderByString(pageFilter.SortProperty, pageFilter.SortDirection)
                 .Skip(page * pageSize).Take(pageSize);
-
+            var totalCount = await query.CountAsync();
             var items = await query.ToListAsync();
-            return _mapper.Map<List<ItemDto>>(items);
+            var mapped = _mapper.Map<List<ItemDto>>(items);
+            return new PagedResult<ItemDto>(pageSize, totalCount, pageFilter.Page, mapped);
         }
 
         public async Task<ItemDto> GetItem(long id)

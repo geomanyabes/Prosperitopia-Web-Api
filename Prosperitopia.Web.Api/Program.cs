@@ -20,7 +20,16 @@ builder.Host.ConfigureServices((context, services) =>
 
     services.RegisterRepositories();
     services.RegisterServices();
-
+    services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAllOrigins",
+            builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
+    });
     var mapperConfiguration = new MapperConfiguration(cfg =>
     {
         cfg.AddProfile<MappingProfile>();
@@ -44,8 +53,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("AllowAllOrigins");
 }
-
+else
+{
+    app.UseCors();
+}
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

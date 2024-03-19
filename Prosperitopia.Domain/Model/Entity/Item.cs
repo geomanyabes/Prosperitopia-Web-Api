@@ -15,7 +15,6 @@ namespace Prosperitopia.Domain.Model.Entity
 
         [Precision(18, 2)]
         public decimal? Price { get; set; }
-        public long? CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public string Category { get; set; }
     }
 }

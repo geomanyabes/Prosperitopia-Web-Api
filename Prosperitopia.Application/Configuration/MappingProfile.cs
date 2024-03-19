@@ -9,7 +9,6 @@ namespace Prosperitopia.Application.Configuration
         {
             CreateMap<Item, ItemDto>();
             CreateMap<CreUpdateItem, Item>().ReverseMap();
-            CreateMap<Category, CategoryDto>();
 
             //TODO: Add mapping config when applicable.
         }

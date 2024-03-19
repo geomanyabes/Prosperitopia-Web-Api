@@ -6,7 +6,6 @@ namespace Prosperitopia.Domain
     public class ProsperitopiaDbContext : DbContext
     {
         public DbSet<Item> Items { get; set; }
-        public DbSet<Category> Categories { get; set; }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public ProsperitopiaDbContext()
@@ -35,15 +34,6 @@ namespace Prosperitopia.Domain
             mb.Entity<Item>(entity =>
             {
                 entity.ToTable("Item");
-                entity.HasOne(e => e.Category)
-                .WithMany(e => e.Items)
-                .HasForeignKey(e => e.CategoryId)
-                .HasConstraintName("FK_Item_Category");
-            });
-            mb.Entity<Category>(e =>
-            {
-                e.ToTable("Category");
-
             });
         }
     }
