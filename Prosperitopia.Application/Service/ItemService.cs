@@ -28,8 +28,7 @@ namespace Prosperitopia.Application.Service
 
         public async Task<PagedResult<ItemDto>> GetItems(SearchFilter searchFilter, PageFilter pageFilter)
         {
-            var query = _itemRepository.GetAll()
-                .Include(x => x.Category).AsQueryable();
+            var query = _itemRepository.GetAll().AsQueryable();
 
             string search = searchFilter.Search;
             
@@ -82,6 +81,8 @@ namespace Prosperitopia.Application.Service
         public async Task<ItemDto> CreateItem(ItemDto item)
         {
             var mapped = _mapper.Map<Item>(item);
+            mapped.CreatedDate = DateTime.Now;
+            mapped.CreatedBy = "test";
 
             _ = await _itemValidator.ValidateOnCreate(mapped);
 
