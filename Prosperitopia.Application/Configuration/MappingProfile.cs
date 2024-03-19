@@ -7,8 +7,7 @@ namespace Prosperitopia.Application.Configuration
     {
         public MappingProfile()
         {
-            CreateMap<Item, ItemDto>();
-            CreateMap<CreUpdateItem, Item>().ReverseMap();
+            CreateMap<ItemDto, Item>().ReverseMap();
 
             //TODO: Add mapping config when applicable.
         }

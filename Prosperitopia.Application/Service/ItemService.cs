@@ -69,7 +69,7 @@ namespace Prosperitopia.Application.Service
             return _mapper.Map<ItemDto>(item);
         }
 
-        public async Task<ItemDto> UpdateItem(CreUpdateItem item)
+        public async Task<ItemDto> UpdateItem(ItemDto item)
         {
             var mapped = _mapper.Map<Item>(item);
 
@@ -79,7 +79,7 @@ namespace Prosperitopia.Application.Service
             await _itemRepository.SaveChangesAsync();
             return _mapper.Map<ItemDto>(existing);
         }
-        public async Task<ItemDto> CreateItem(CreUpdateItem item)
+        public async Task<ItemDto> CreateItem(ItemDto item)
         {
             var mapped = _mapper.Map<Item>(item);
 

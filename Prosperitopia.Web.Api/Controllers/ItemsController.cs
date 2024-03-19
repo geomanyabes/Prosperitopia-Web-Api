@@ -51,7 +51,7 @@ namespace Prosperitopia.Web.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateItem(CreUpdateItem itemDto)
+        public async Task<IActionResult> CreateItem(ItemDto itemDto)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace Prosperitopia.Web.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateItem(long id, CreUpdateItem itemDto)
+        public async Task<IActionResult> UpdateItem(long id, ItemDto itemDto)
         {
             try
             {

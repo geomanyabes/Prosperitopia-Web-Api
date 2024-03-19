@@ -13,7 +13,6 @@ namespace Prosperitopia.Web.Api.Configuration
         {
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IItemValidator, ItemValidator>();
-            services.AddScoped<ICategoryValidator, CategoryValidator>();
 
             return services;
         }
@@ -21,7 +20,6 @@ namespace Prosperitopia.Web.Api.Configuration
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IItemRepository, ItemRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
             return services;
         }
     }
