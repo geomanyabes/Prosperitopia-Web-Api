@@ -1,5 +1,7 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Prosperitopia.Application.Configuration;
+using Prosperitopia.Application.Middleware;
 using Prosperitopia.Domain;
 using Prosperitopia.Web.Api.Configuration;
 using Serilog;
@@ -8,15 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureServices((context, services) =>
 {
-    //var configuration = context.Configuration;
     services.AddRouting(options => options.LowercaseUrls = true);
 
-    services.AddDbContext<ProsperitopiaDbContext>();
-    //commented out. we will use in-memory for now.
-    //services.AddDbContext<ProsperitopiaDbContext>(opt =>
-    //{
-    //    opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-    //});
+    services.AddDbContext<ProsperitopiaDbContext>(options =>
+    {
+        //options.UseSqlServer(context.Configuration.GetConnectionString("DefaultConnection"));
+        options.UseInMemoryDatabase("Prosperitopia");
+    });
 
     services.RegisterRepositories();
     services.RegisterServices();
@@ -59,6 +59,8 @@ else
 {
     app.UseCors();
 }
+
+app.UseMiddleware<ApiKeyAuthMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -7,7 +7,7 @@ namespace Prosperitopia.Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public abstract class BaseController : ControllerBase
     {
 

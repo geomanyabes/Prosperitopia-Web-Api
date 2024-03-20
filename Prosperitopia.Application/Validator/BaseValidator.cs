@@ -37,5 +37,11 @@ namespace Prosperitopia.Application.Validator
             var exists = await _repository.GetByIdAsync(entity.Id) ?? throw new ArgumentException("Entity with specified ID does not exist.");
             return exists;
         }
+
+        public async Task<T> ValidateOnDelete(long id)
+        {
+            if (id == 0L) throw new ArgumentException("Invalid id");
+            return await _repository.GetByIdAsync(id) ?? throw new ArgumentException("Entity with specified ID does not exist.");
+        }
     }
 }

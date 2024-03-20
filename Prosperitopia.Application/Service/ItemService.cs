@@ -74,7 +74,12 @@ namespace Prosperitopia.Application.Service
 
             var existing = await _itemValidator.ValidateOnUpdate(mapped);
 
-            _itemRepository.Update(existing, mapped);
+            existing.Name = item.Name;
+            existing.Description = item.Description;
+            existing.Category = item.Category;
+            existing.Price = item.Price;
+            existing.ModifiedDate = DateTime.Now;
+            existing.ModifiedBy = "test";
             await _itemRepository.SaveChangesAsync();
             return _mapper.Map<ItemDto>(existing);
         }
@@ -89,6 +94,19 @@ namespace Prosperitopia.Application.Service
             _itemRepository.Insert(mapped);
             await _itemRepository.SaveChangesAsync();
             return _mapper.Map<ItemDto>(mapped);
+        }
+
+        public async Task<ItemDto> DeleteItem(long id)
+        {
+            var item = await _itemValidator.ValidateOnDelete(id);
+            _itemRepository.Update(item, new()
+            {
+                IsDeleted = true,
+                ModifiedBy = "test",
+                ModifiedDate = DateTime.Now
+            });
+            await _itemRepository.SaveChangesAsync();
+            return _mapper.Map<ItemDto>(item);
         }
     }
 }

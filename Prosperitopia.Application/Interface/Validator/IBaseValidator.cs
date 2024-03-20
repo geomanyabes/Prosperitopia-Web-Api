@@ -11,6 +11,7 @@ namespace Prosperitopia.Application.Interface.Validator
     {
         Task<bool> ValidateOnCreate(T entity);
         Task<T> ValidateOnDelete(T entity);
+        Task<T> ValidateOnDelete(long id);
         Task<T> ValidateOnUpdate(T entity);
     }
 }

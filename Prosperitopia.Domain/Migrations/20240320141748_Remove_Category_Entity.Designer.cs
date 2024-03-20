@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prosperitopia.Domain;
 
@@ -11,9 +12,10 @@ using Prosperitopia.Domain;
 namespace Prosperitopia.Domain.Migrations
 {
     [DbContext(typeof(ProsperitopiaDbContext))]
-    partial class ProsperitopiaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240320141748_Remove_Category_Entity")]
+    partial class Remove_Category_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
