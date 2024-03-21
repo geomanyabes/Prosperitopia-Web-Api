@@ -28,7 +28,7 @@ namespace Prosperitopia.Application.Service
 
         public async Task<PagedResult<ItemDto>> GetItems(SearchFilter searchFilter, PageFilter pageFilter)
         {
-            var query = _itemRepository.GetAll().AsQueryable();
+            var query = _itemRepository.GetAll().Where(x => x.IsDeleted != true);
 
             string search = searchFilter.Search;
             
@@ -99,12 +99,9 @@ namespace Prosperitopia.Application.Service
         public async Task<ItemDto> DeleteItem(long id)
         {
             var item = await _itemValidator.ValidateOnDelete(id);
-            _itemRepository.Update(item, new()
-            {
-                IsDeleted = true,
-                ModifiedBy = "test",
-                ModifiedDate = DateTime.Now
-            });
+            item.IsDeleted = true;
+            item.ModifiedBy = "test";
+            item.ModifiedDate = DateTime.Now;
             await _itemRepository.SaveChangesAsync();
             return _mapper.Map<ItemDto>(item);
         }
