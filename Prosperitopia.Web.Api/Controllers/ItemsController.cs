@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Prosperitopia.Application.Interface.Service;
 using Prosperitopia.Domain.Model.Dto;
+using Serilog;
 
 namespace Prosperitopia.Web.Api.Controllers
 {
@@ -24,9 +25,8 @@ namespace Prosperitopia.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-
+                Log.Error(ex, "Error GET /items: {0}");
                 return StatusCode(500, ex.Message);
-                //TODO: Logging
             }
         }
 
@@ -44,9 +44,8 @@ namespace Prosperitopia.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-
+                Log.Error(ex, "Error GET /items/{id}: {0}");
                 return StatusCode(500, ex.Message);
-                //TODO: Logging
             }
         }
 
@@ -64,9 +63,8 @@ namespace Prosperitopia.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-
+                Log.Error(ex, "Error POST /items: {0}");
                 return StatusCode(500, ex.Message);
-                //TODO: Logging
             }
         }
 
@@ -85,6 +83,7 @@ namespace Prosperitopia.Web.Api.Controllers
             }
             catch(Exception ex)
             {
+                Log.Error(ex, "Error PUT /items: {0}");
                 return StatusCode(500, ex.Message);
             }
         }
@@ -103,6 +102,7 @@ namespace Prosperitopia.Web.Api.Controllers
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error DELETE /items: {0}");
                 return StatusCode(500, ex.Message);
             }
         }
