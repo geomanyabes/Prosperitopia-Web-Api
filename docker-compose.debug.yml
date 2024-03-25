@@ -4,7 +4,7 @@ version: '3.4'
 
 services:
   prosperitopiawebapi:
-    image: prosperitopiawebapi
+    image: prosperitopia-server
     build:
       context: .
       dockerfile: Prosperitopia.Web.Api/Dockerfile
@@ -14,3 +14,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge

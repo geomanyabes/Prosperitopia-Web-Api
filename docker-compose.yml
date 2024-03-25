@@ -4,9 +4,15 @@ version: '3.4'
 
 services:
   prosperitopiawebapi:
-    image: prosperitopiawebapi
+    image: prosperitopia-server
     build:
       context: .
       dockerfile: Prosperitopia.Web.Api/Dockerfile
     ports:
       - 7117:7117
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge
